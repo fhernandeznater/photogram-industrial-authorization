@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
   before_action :is_an_authorized_user, only: [:destroy, :create]
+  before_action :is_comment_author, only: [:edit]
 
   # GET /comments or /comments.json
   def index
@@ -71,6 +72,12 @@ class CommentsController < ApplicationController
         @photo = Photo.where({ :id => @comment.photo_id}).first
       end
       if current_user != @photo.owner && @photo.owner.private? && !current_user.leaders.include?(@photo.owner)
+        redirect_back fallback_location: root_url, alert: "You're not authorized for that."
+      end
+    end
+
+    def is_comment_author
+      if current_user != @comment.author
         redirect_back fallback_location: root_url, alert: "You're not authorized for that."
       end
     end
