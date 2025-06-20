@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show liked feed discover ]
+  before_action :ensure_current_user_is_user, only: %i[ feed discover ]
 
   def index
     @users = @q.result
@@ -14,4 +15,11 @@ class UsersController < ApplicationController
         @user = current_user
       end
     end
+
+    def ensure_current_user_is_user
+      if current_user != @user
+        redirect_back fallback_location: root_url, alert: "You're not authorized for that"
+      end
+    end
+
 end
