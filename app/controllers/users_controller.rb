@@ -6,6 +6,10 @@ class UsersController < ApplicationController
     @users = @q.result
   end
 
+  def show
+    authorize @user
+  end
+
   private
 
     def set_user
