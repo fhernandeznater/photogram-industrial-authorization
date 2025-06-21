@@ -14,4 +14,14 @@ class PhotoPolicy < ApplicationPolicy
       !photo.owner.private? ||
       photo.owner.followers.include?(user)
   end
+
+  #You should only edit a photo if you're the owner
+
+  def edit?
+    user == photo.owner
+  end
+
+  def update?
+    user == photo.owner
+  end
 end 

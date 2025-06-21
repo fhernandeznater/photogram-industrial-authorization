@@ -1,19 +1,17 @@
 class FollowRequestPolicy < ApplicationPolicy
 
-#attribute reader line goes here:
+attr_reader :current_user, :follow_request
 
-#Let's set up two methods here:
-
-  #First, let's initialize:
-
-  def initialize
-  
+  def initialize(current_user, follow_request)
+    @current_user = current_user
+    @follow_request = follow_request
   end
 
-  #Second, let's make a show method:
-  
-  def show?
+  #One should only see a follow request if they sent it or they received it
 
+  def show?
+    follow_request.sender == current_user ||
+      follow_request.recipient == current_user
   end
 
 

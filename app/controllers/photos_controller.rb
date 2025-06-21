@@ -19,6 +19,7 @@ class PhotosController < ApplicationController
 
   # GET /photos/1/edit
   def edit
+    authorize @photo
   end
 
   # POST /photos or /photos.json

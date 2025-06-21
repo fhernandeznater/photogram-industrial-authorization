@@ -7,17 +7,14 @@ attr_reader :current_user, :comment
 
   #First, let's initialize:
 
-  def initialize
-  
+  def initialize(current_user, comment)
+    @current_user = current_user
+    @comment = comment
   end
 
-  #Second, let's make a show method:
+  #One should only be able to see a comment if they wrote it, if the comment author is a public account, or if the current user follows them
 
   def show?
-    true
-  end
-
-  def show_comment?
     comment.author == current_user ||
       !comment.author.private? ||
       comment.author.followers.include?(current_user)

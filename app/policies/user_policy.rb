@@ -10,6 +10,8 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  #This allows you to see the profile of a private user but not their photos
+
   def show_photos?
     user == current_user ||
       !user.private? ||
