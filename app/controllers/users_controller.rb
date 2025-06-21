@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @users = @q.result
+    # Now, how do I implement the Pundit stuff here? Should I keep this starter code or do what the Pundit ReadMe suggests? Wouldn't the latter change the results of the indexing?
   end
 
   def show

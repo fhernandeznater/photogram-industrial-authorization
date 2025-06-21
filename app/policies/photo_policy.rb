@@ -7,7 +7,7 @@ class PhotoPolicy < ApplicationPolicy
   end
 
 
-# Our policy is that a photo should only be seen by the owner or followers of the owner, unless the owner is not private in which case anyone can see it
+# A photo should only be seen by the owner or followers of the owner, unless the owner is not private in which case anyone can see it
 
   def show?
     user == photo.owner ||
@@ -21,7 +21,22 @@ class PhotoPolicy < ApplicationPolicy
     user == photo.owner
   end
 
+  #You should only update a photo if you're the owner
+
   def update?
     user == photo.owner
   end
+
+  def new?
+    user == photo.owner
+  end
+
+  def create?
+    user == photo.owner
+  end
+
+  def destroy?
+    user == photo.owner
+  end
+
 end 
