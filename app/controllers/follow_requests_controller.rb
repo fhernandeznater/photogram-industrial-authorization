@@ -13,8 +13,8 @@ class FollowRequestsController < ApplicationController
 
   # GET /follow_requests/new
   def new
-    authorize @follow_request
     @follow_request = FollowRequest.new
+      authorize @follow_request
   end
 
   # GET /follow_requests/1/edit

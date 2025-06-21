@@ -14,8 +14,10 @@ class PhotosController < ApplicationController
 
   # GET /photos/new
   def new
-    authorize @photo
     @photo = Photo.new
+    @photo.owner = current_user
+    authorize @photo
+    return
   end
 
   # GET /photos/1/edit
@@ -26,7 +28,7 @@ class PhotosController < ApplicationController
   # POST /photos or /photos.json
   def create
     @photo = Photo.new(photo_params)
-    # @photo.owner = current_user => covered by the PhotoPolicy now, I guess
+    @photo.owner = current_user
 
     authorize @photo
 

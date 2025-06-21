@@ -9,7 +9,7 @@
         </h2>
 
         <div>
-          <% if policy(@photo).edit? %>
+          <% if current_user == photo.owner %>
             <%= link_to edit_photo_path(photo), class: "btn btn-link btn-sm text-muted" do %>
               <i class="fas fa-edit fa-fw"></i>
             <% end %>

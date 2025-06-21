@@ -22,7 +22,7 @@ attr_reader :current_user, :follow_request
   #One should only edit a follow request if they are the sender (the recipient can delete it, but they can't edit it I guess? Does that make sense?)
 
   def edit?
-    follow_request.sender == current_user
+    follow_request.sender == current_user || follow_request.recipient == current_user
   end
 
   def create?
@@ -30,7 +30,7 @@ attr_reader :current_user, :follow_request
   end
 
   def update?
-    follow_request.sender == current_user
+    follow_request.sender == current_user || follow_request.recipient == current_user
   end
 
   def destroy?
