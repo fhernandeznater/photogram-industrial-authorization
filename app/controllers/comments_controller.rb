@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
 
   # GET /comments or /comments.json
   def index
-    @comments = Comment.all
+    @comments = policy_scope(Comment)
   end
 
   # GET /comments/1 or /comments/1.json
@@ -15,17 +15,21 @@ class CommentsController < ApplicationController
 
   # GET /comments/new
   def new
+    authorize @comment
     @comment = Comment.new
   end
 
   # GET /comments/1/edit
   def edit
+    authorize @comment
   end
 
   # POST /comments or /comments.json
   def create
     @comment = Comment.new(comment_params)
     @comment.author = current_user
+
+    authorize @comment
 
     respond_to do |format|
       if @comment.save
@@ -40,6 +44,9 @@ class CommentsController < ApplicationController
 
   # PATCH/PUT /comments/1 or /comments/1.json
   def update
+
+    authorize @comment
+
     respond_to do |format|
       if @comment.update(comment_params)
         format.html { redirect_to root_url, notice: "Comment was successfully updated." }
@@ -53,6 +60,9 @@ class CommentsController < ApplicationController
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
+
+    authorize @comment
+    
     @comment.destroy
     respond_to do |format|
       format.html { redirect_back fallback_location: root_url, notice: "Comment was successfully destroyed." }

@@ -20,4 +20,24 @@ attr_reader :current_user, :comment
       comment.author.followers.include?(current_user)
   end
 
+  def new?
+    comment.author == current_user  
+  end
+
+  def edit?
+    comment.author == current_user
+  end
+
+  def create?
+    comment.author == current_user
+  end
+
+  def update?
+    comment.author == current_user
+  end
+
+  def destroy?
+    comment.author == current_user
+  end
+
 end
