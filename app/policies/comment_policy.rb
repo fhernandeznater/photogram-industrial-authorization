@@ -21,7 +21,7 @@ attr_reader :current_user, :comment
   end
 
   def new?
-    comment.author == current_user  
+    true  
   end
 
   def edit?
